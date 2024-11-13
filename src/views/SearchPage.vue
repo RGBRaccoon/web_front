@@ -49,9 +49,6 @@
             </div>
             <button @click="resetFilters" class="reset-button">초기화</button>
         </div>
-
-        <!-- 초기화 버튼 -->
-
         <!-- 필터 적용 후 영화 목록 -->
         <div class="movie-results">
             <MovieCard
@@ -64,6 +61,7 @@
 </template>
 
 <script>
+import { fetchMovies } from '@/services/api';
 import MovieCard from '@/components/MovieCard.vue';
 
 export default {
@@ -92,13 +90,10 @@ export default {
         };
     },
     async created() {
-        this.movies = await this.fetchMovies();
+        this.movies = await fetchMovies();
         this.filteredMovies = this.movies;
     },
     methods: {
-        async fetchMovies() {
-            return [];
-        },
         applyFilters() {
             this.filteredMovies = this.movies.filter((movie) => {
                 const matchesGenre = this.selectedGenre
