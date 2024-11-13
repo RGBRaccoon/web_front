@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/views/Home.vue';
 import Search from '@/views/SearchPage.vue';
+import Popular from '@/views/PopularPage.vue';
 const routes = [
     {
         path: '/',
@@ -11,6 +12,11 @@ const routes = [
         path: '/search',
         name: 'SearchPage',
         component: Search,
+    },
+    {
+        path: '/popular',
+        name: 'PopularPage',
+        component: Popular,
     },
     // 다른 라우트 추가 가능
 ];
