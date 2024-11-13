@@ -79,6 +79,6 @@ export default {
 
 .login_icon {
     width: 60px;
-    height: 60px;   
+    height: 60px;
 }
 </style>
