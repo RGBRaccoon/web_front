@@ -39,7 +39,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 0;
     background-color: #222; /* 더 진한 검정색 */
     color: #ffcc00;
     z-index: 1000; /* 다른 콘텐츠 위에 표시되도록 설정 */
@@ -79,6 +79,6 @@ export default {
 
 .login_icon {
     width: 60px;
-    height: 60px;
+    height: 60px;   
 }
 </style>
