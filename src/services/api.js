@@ -18,3 +18,19 @@ export const fetchMovies = async () => {
         return [];
     }
 };
+
+export const fetchPopularMovies = async () => {
+    try {
+        const response = await axios.get(`${baseURL}/movie/popular`, {
+            params: {
+                api_key: apiKey,
+                language: 'ko-KR',
+                page: 1,
+            },
+        });
+        return response.data.results;
+    } catch (error) {
+        console.error('Failed to fetch popular movies:', error);
+        return [];
+    }
+};
