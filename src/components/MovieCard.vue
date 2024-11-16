@@ -102,7 +102,7 @@
     width: 20px;
     height: 20px;
     display: inline-block;
-    background: url('/src/assets/logo.png') no-repeat center center;
+    background: url('/src/assets/star.png') no-repeat center center;
     background-size: cover;
     opacity: 0.5;
     transition: opacity 0.3s ease;
@@ -110,7 +110,7 @@
   
   .icon-star.active {
     opacity: 1;
-    background: url('/src/assets/logo.png') no-repeat center center;
+    background: url('/src/assets/star.png') no-repeat center center;
     background-size: cover;
   }
   </style>
