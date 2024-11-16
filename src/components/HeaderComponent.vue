@@ -14,13 +14,19 @@
                 >내가 찜한 리스트</router-link
             >
         </nav>
-        <router-link to="/signin" class="login-link">
+        <button
+            @click="
+                $emit('show-login');
+                console.log('Login button clicked!');
+            "
+            class="login-button"
+        >
             <img
                 src="@/assets/login.png"
                 alt="로그인 아이콘"
                 class="login_icon"
             />
-        </router-link>
+        </button>
     </header>
 </template>
 
@@ -71,12 +77,19 @@ export default {
     align-items: center;
 }
 
-.login-link {
-    display: flex;
-    align-items: center;
-    margin-left: auto; /* 로그인 아이콘을 헤더의 가장 오른쪽에 배치 */
+.login-button {
+    background-color: #222;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: #222;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
 }
 
+.login-button:hover {
+    background-color: #555;
+}
 .login_icon {
     width: 60px;
     height: 60px;
