@@ -13,7 +13,7 @@
 
 <script>
 import MovieCard from '@/components/MovieCard.vue';
-import { fetchPopularMovies } from '@/services/api'; // 인기 영화 데이터를 가져오는 API 함수
+import { fetchPopularMovies } from '@/services/movieService'; // 인기 영화 데이터를 가져오는 API 함수
 
 export default {
     name: 'PopularPage',
@@ -24,7 +24,9 @@ export default {
         };
     },
     async created() {
-        this.popularMovies = await fetchPopularMovies(); // 인기 영화 데이터를 로드
+        const popularData = await fetchPopularMovies();
+        console.log('Popular Movies Response:', popularData.results);
+        this.popularMovies = popularData.results || [];
     },
 };
 </script>
