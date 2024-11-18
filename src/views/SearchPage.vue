@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { fetchMovies } from '@/services/api';
+import { fetchPopularMovies } from '@/services/movieService';
 import MovieCard from '@/components/MovieCard.vue';
 
 export default {
@@ -90,8 +90,10 @@ export default {
         };
     },
     async created() {
-        this.movies = await fetchMovies();
-        this.filteredMovies = this.movies;
+        const popularData = await fetchPopularMovies();
+        console.log('Popular Movies Response:', popularData.results);
+        this.movies = popularData.results || [];
+        this.filteredMovies=this.movies;
     },
     methods: {
         applyFilters() {
