@@ -5,94 +5,98 @@
         <div class="main-content">
             <router-view />
         </div>
-        <!-- 로그인/회원가입 모달 -->
-        <div v-if="showLoginModal" class="modal">
-            <div class="modal-content">
-                <button class="close-button" @click="toggleLoginModal">
-                    &times;
-                </button>
-                <div class="tabs">
-                    <button
-                        :class="{ active: isLoginTab }"
-                        @click="isLoginTab = true"
-                        class="tab-button"
-                    >
-                        로그인
+        <transition name="modal">
+            <!-- 로그인/회원가입 모달 -->
+            <div v-if="showLoginModal" class="modal">
+                <div class="modal-content">
+                    <button class="close-button" @click="toggleLoginModal">
+                        &times;
                     </button>
-                    <button
-                        :class="{ active: !isLoginTab }"
-                        @click="isLoginTab = false"
-                        class="tab-button"
-                    >
-                        회원가입
-                    </button>
-                </div>
-                <div v-if="isLoginTab">
-                    <!-- 로그인 폼 -->
-                    <h2>로그인</h2>
-                    <form @submit.prevent="handleLogin">
-                        <div class="form-group">
-                            <label for="username">아이디</label>
-                            <input
-                                type="text"
-                                v-model="loginUsername"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="password">비밀번호</label>
-                            <input
-                                type="password"
-                                v-model="loginPassword"
-                                required
-                            />
-                        </div>
-                        <button type="submit" class="login-submit-button">
+                    <div class="tabs">
+                        <button
+                            :class="{ active: isLoginTab }"
+                            @click="isLoginTab = true"
+                            class="tab-button"
+                        >
                             로그인
                         </button>
-                        <p v-if="loginErrorMessage" class="error">
-                            {{ loginErrorMessage }}
-                        </p>
-                    </form>
-                </div>
-                <div v-else>
-                    <!-- 회원가입 폼 -->
-                    <h2>회원가입</h2>
-                    <form @submit.prevent="handleSignup">
-                        <div class="form-group">
-                            <label for="signupUsername">아이디</label>
-                            <input
-                                type="text"
-                                v-model="signupUsername"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="signupPassword">비밀번호</label>
-                            <input
-                                type="password"
-                                v-model="signupPassword"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmPassword">비밀번호 확인</label>
-                            <input
-                                type="password"
-                                v-model="confirmPassword"
-                                required
-                            />
-                        </div>
-                        <button type="submit" class="signup-submit-button">
+                        <button
+                            :class="{ active: !isLoginTab }"
+                            @click="isLoginTab = false"
+                            class="tab-button"
+                        >
                             회원가입
                         </button>
-                        <p v-if="signupErrorMessage" class="error">
-                            {{ signupErrorMessage }}
-                        </p>
-                    </form>
+                    </div>
+                    <div v-if="isLoginTab">
+                        <!-- 로그인 폼 -->
+                        <h2>로그인</h2>
+                        <form @submit.prevent="handleLogin">
+                            <div class="form-group">
+                                <label for="username">아이디</label>
+                                <input
+                                    type="text"
+                                    v-model="loginUsername"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">비밀번호</label>
+                                <input
+                                    type="password"
+                                    v-model="loginPassword"
+                                    required
+                                />
+                            </div>
+                            <button type="submit" class="login-submit-button">
+                                로그인
+                            </button>
+                            <p v-if="loginErrorMessage" class="error">
+                                {{ loginErrorMessage }}
+                            </p>
+                        </form>
+                    </div>
+                    <div v-else>
+                        <!-- 회원가입 폼 -->
+                        <h2>회원가입</h2>
+                        <form @submit.prevent="handleSignup">
+                            <div class="form-group">
+                                <label for="signupUsername">아이디</label>
+                                <input
+                                    type="text"
+                                    v-model="signupUsername"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="signupPassword">비밀번호</label>
+                                <input
+                                    type="password"
+                                    v-model="signupPassword"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword"
+                                    >비밀번호 확인</label
+                                >
+                                <input
+                                    type="password"
+                                    v-model="confirmPassword"
+                                    required
+                                />
+                            </div>
+                            <button type="submit" class="signup-submit-button">
+                                회원가입
+                            </button>
+                            <p v-if="signupErrorMessage" class="error">
+                                {{ signupErrorMessage }}
+                            </p>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </transition>
     </div>
 </template>
 
@@ -205,7 +209,16 @@ export default {
     font-size: 1.5rem;
     cursor: pointer;
 }
+.modal-enter-active,
+.modal-leave-active {
+    transition: opacity 0.3s, transform 0.3s;
+}
 
+.modal-enter-from,
+.modal-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
+}
 .error {
     color: red;
     margin-top: 1rem;

@@ -118,25 +118,24 @@ export default {
     color: #ffcc00;
 }
 
-
 .movie-list {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  overflow-x: auto; /* 횡스크롤 활성화 */
-  scroll-behavior: smooth; /* 부드러운 스크롤 */
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    overflow-x: auto; /* 횡스크롤 활성화 */
+    scroll-behavior: smooth; /* 부드러운 스크롤 */
 }
 .movie-card {
     flex-shrink: 0; /* 스크롤 가능 영역에서 축소 방지 */
 }
 
 .movie-list::-webkit-scrollbar {
-  height: 8px; /* 스크롤바 높이 설정 */
-  background-color: #444; /* 스크롤바 배경색 */
+    height: 8px; /* 스크롤바 높이 설정 */
+    background-color: #444; /* 스크롤바 배경색 */
 }
 
 .movie-list::-webkit-scrollbar-thumb {
-  background-color: #ffcc00; /* 스크롤바 색상 */
-  border-radius: 4px; /* 스크롤바 모서리 둥글게 */
+    background-color: #ffcc00; /* 스크롤바 색상 */
+    border-radius: 4px; /* 스크롤바 모서리 둥글게 */
 }
 </style>
