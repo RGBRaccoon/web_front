@@ -24,6 +24,11 @@ const fetchMovies = async (endpoint, params = {}) => {
 };
 export const fetchPopularMovies = () => fetchMovies('/movie/popular');
 
+export const fetchPopularMoviesByPage = async (page = 2) => {
+    return fetchMovies('/movie/popular', { page }); // 페이지 매개변수 추가
+};
+
+
 // 최신 영화
 export const fetchNewMovies = () => fetchMovies('/movie/now_playing');
 
@@ -33,6 +38,8 @@ export const fetchMoviesByGenre = (genreId) =>
 export default {
     fetchMovies,
     fetchPopularMovies,
+    fetchPopularMoviesByPage,
     fetchNewMovies,
     fetchMoviesByGenre,
+    
 };
