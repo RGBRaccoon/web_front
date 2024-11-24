@@ -32,11 +32,14 @@ export default {
         window.addEventListener('scroll', this.handleScroll); // 스크롤 이벤트 추가
     },
     beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll); // 컴포넌트 해제 시 이벤트 제거
+        window.removeEventListener('scroll', this.handleScroll); // 컴포넌트 해제 시 이벤트 제거
     },
     methods: {
         async loadMovies() {
-            if (this.loading || (this.totalPages && this.currentPage > this.totalPages)) {
+            if (
+                this.loading ||
+                (this.totalPages && this.currentPage > this.totalPages)
+            ) {
                 // 로딩 중이거나 더 이상 로드할 데이터가 없을 때 중단
                 return;
             }
@@ -46,7 +49,7 @@ export default {
                 this.popularMovies = [...this.popularMovies, ...data.results]; // 기존 영화 목록에 추가
                 this.totalPages = data.total_pages; // 총 페이지 수 설정
                 this.currentPage++; // 다음 페이지로 이동
-                console.log(this.currentPage)
+                console.log(this.currentPage);
             } catch (error) {
                 console.error('Failed to fetch movies:', error);
             } finally {
@@ -55,7 +58,8 @@ export default {
         },
         handleScroll() {
             const scrollContainer = document.documentElement;
-            const scrollBottom = scrollContainer.scrollHeight - scrollContainer.scrollTop;
+            const scrollBottom =
+                scrollContainer.scrollHeight - scrollContainer.scrollTop;
             const windowHeight = window.innerHeight;
 
             // 스크롤이 하단 100px 이내일 때 데이터를 추가로 로드
