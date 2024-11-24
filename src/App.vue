@@ -5,94 +5,103 @@
         <div class="main-content">
             <router-view />
         </div>
-        <!-- 로그인/회원가입 모달 -->
-        <div v-if="showLoginModal" class="modal">
-            <div class="modal-content">
-                <button class="close-button" @click="toggleLoginModal">
-                    &times;
-                </button>
-                <div class="tabs">
-                    <button
-                        :class="{ active: isLoginTab }"
-                        @click="isLoginTab = true"
-                        class="tab-button"
-                    >
-                        로그인
+        <transition name="modal">
+            <!-- 로그인/회원가입 모달 -->
+            <div v-if="showLoginModal" class="modal">
+                <div class="modal-content">
+                    <button class="close-button" @click="toggleLoginModal">
+                        &times;
                     </button>
-                    <button
-                        :class="{ active: !isLoginTab }"
-                        @click="isLoginTab = false"
-                        class="tab-button"
-                    >
-                        회원가입
-                    </button>
-                </div>
-                <div v-if="isLoginTab">
-                    <!-- 로그인 폼 -->
-                    <h2>로그인</h2>
-                    <form @submit.prevent="handleLogin">
-                        <div class="form-group">
-                            <label for="username">아이디</label>
-                            <input
-                                type="text"
-                                v-model="loginUsername"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="password">비밀번호</label>
-                            <input
-                                type="password"
-                                v-model="loginPassword"
-                                required
-                            />
-                        </div>
-                        <button type="submit" class="login-submit-button">
+                    <div class="tabs">
+                        <button
+                            :class="{ active: isLoginTab }"
+                            @click="isLoginTab = true"
+                            class="tab-button"
+                        >
                             로그인
                         </button>
-                        <p v-if="loginErrorMessage" class="error">
-                            {{ loginErrorMessage }}
-                        </p>
-                    </form>
-                </div>
-                <div v-else>
-                    <!-- 회원가입 폼 -->
-                    <h2>회원가입</h2>
-                    <form @submit.prevent="handleSignup">
-                        <div class="form-group">
-                            <label for="signupUsername">아이디</label>
-                            <input
-                                type="text"
-                                v-model="signupUsername"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="signupPassword">비밀번호</label>
-                            <input
-                                type="password"
-                                v-model="signupPassword"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmPassword">비밀번호 확인</label>
-                            <input
-                                type="password"
-                                v-model="confirmPassword"
-                                required
-                            />
-                        </div>
-                        <button type="submit" class="signup-submit-button">
+                        <button
+                            :class="{ active: !isLoginTab }"
+                            @click="isLoginTab = false"
+                            class="tab-button"
+                        >
                             회원가입
                         </button>
-                        <p v-if="signupErrorMessage" class="error">
-                            {{ signupErrorMessage }}
-                        </p>
-                    </form>
+                    </div>
+                    <div v-if="isLoginTab">
+                        <!-- 로그인 폼 -->
+                        <h2>로그인</h2>
+                        <form @submit.prevent="handleLogin">
+                            <div class="form-group">
+                                <label for="username">아 이 디</label>
+                                <input
+                                    type="text"
+                                    v-model="loginUsername"
+                                    class="styled-input"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">비밀번호</label>
+                                <input
+                                    type="password"
+                                    v-model="loginPassword"
+                                    class="styled-input"
+                                    required
+                                />
+                            </div>
+                            <button type="submit" class="login-submit-button">
+                                로그인
+                            </button>
+                            <p v-if="loginErrorMessage" class="error">
+                                {{ loginErrorMessage }}
+                            </p>
+                        </form>
+                    </div>
+                    <div v-else>
+                        <!-- 회원가입 폼 -->
+                        <h2>회원가입</h2>
+                        <form @submit.prevent="handleSignup">
+                            <div class="form-group">
+                                <label for="signupUsername">아 이 디    </label>
+                                <input
+                                    type="text"
+                                    v-model="signupUsername"
+                                    class="styled-input"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="signupPassword">비밀번호   </label>
+                                <input
+                                    type="password"
+                                    v-model="signupPassword"
+                                    class="styled-input"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword"
+                                    >비밀번호 확인</label
+                                >
+                                <input
+                                    type="password"
+                                    v-model="confirmPassword"
+                                    class="styled-input"
+                                    required
+                                />
+                            </div>
+                            <button type="submit" class="signup-submit-button">
+                                회원가입
+                            </button>
+                            <p v-if="signupErrorMessage" class="error">
+                                {{ signupErrorMessage }}
+                            </p>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </transition>
     </div>
 </template>
 
@@ -188,7 +197,7 @@ export default {
 }
 
 .modal-content {
-    background: #fff;
+    background: #333;
     padding: 2rem;
     border-radius: 8px;
     width: 400px;
@@ -205,7 +214,16 @@ export default {
     font-size: 1.5rem;
     cursor: pointer;
 }
+.modal-enter-active,
+.modal-leave-active {
+    transition: opacity 0.3s, transform 0.3s;
+}
 
+.modal-enter-from,
+.modal-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
+}
 .error {
     color: red;
     margin-top: 1rem;
@@ -261,4 +279,24 @@ export default {
 .login-submit-button:hover {
     background-color: #ffd700;
 }
+
+.styled-input {
+  width: 80%; /* 입력 필드가 부모 컨테이너의 전체 너비를 차지 */
+  padding: 0.8rem; /* 내부 여백 */
+  font-size: 1rem; /* 텍스트 크기 */
+  border: 2px solid #222; /* 테두리 */
+  border-radius: 8px; /* 둥근 모서리 */
+  background-color: #f9f9f9; /* 배경색 */
+  color: #333; /* 텍스트 색상 */
+  outline: none; /* 포커스 시 기본 파란 테두리 제거 */
+  transition: border-color 0.3s, background-color 0.3s; /* 애니메이션 */
+}
+
+/* 입력 필드에 포커스 되었을 때 */
+.styled-input:focus {
+  border-color: #ffcc00; /* 테두리 색상 변경 */
+  background-color: #fff; /* 배경색 변경 */
+  box-shadow: 0 0 5px rgba(255, 204, 0, 0.5); /* 강조 효과 */
+}
+
 </style>

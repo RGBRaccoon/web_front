@@ -93,7 +93,7 @@ export default {
         const popularData = await fetchPopularMovies();
         console.log('Popular Movies Response:', popularData.results);
         this.movies = popularData.results || [];
-        this.filteredMovies=this.movies;
+        this.filteredMovies = this.movies;
     },
     methods: {
         applyFilters() {
