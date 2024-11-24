@@ -33,10 +33,11 @@
                         <h2>로그인</h2>
                         <form @submit.prevent="handleLogin">
                             <div class="form-group">
-                                <label for="username">아이디</label>
+                                <label for="username">아 이 디</label>
                                 <input
                                     type="text"
                                     v-model="loginUsername"
+                                    class="styled-input"
                                     required
                                 />
                             </div>
@@ -45,6 +46,7 @@
                                 <input
                                     type="password"
                                     v-model="loginPassword"
+                                    class="styled-input"
                                     required
                                 />
                             </div>
@@ -61,18 +63,20 @@
                         <h2>회원가입</h2>
                         <form @submit.prevent="handleSignup">
                             <div class="form-group">
-                                <label for="signupUsername">아이디</label>
+                                <label for="signupUsername">아 이 디    </label>
                                 <input
                                     type="text"
                                     v-model="signupUsername"
+                                    class="styled-input"
                                     required
                                 />
                             </div>
                             <div class="form-group">
-                                <label for="signupPassword">비밀번호</label>
+                                <label for="signupPassword">비밀번호   </label>
                                 <input
                                     type="password"
                                     v-model="signupPassword"
+                                    class="styled-input"
                                     required
                                 />
                             </div>
@@ -83,6 +87,7 @@
                                 <input
                                     type="password"
                                     v-model="confirmPassword"
+                                    class="styled-input"
                                     required
                                 />
                             </div>
@@ -192,7 +197,7 @@ export default {
 }
 
 .modal-content {
-    background: #fff;
+    background: #333;
     padding: 2rem;
     border-radius: 8px;
     width: 400px;
@@ -274,4 +279,24 @@ export default {
 .login-submit-button:hover {
     background-color: #ffd700;
 }
+
+.styled-input {
+  width: 80%; /* 입력 필드가 부모 컨테이너의 전체 너비를 차지 */
+  padding: 0.8rem; /* 내부 여백 */
+  font-size: 1rem; /* 텍스트 크기 */
+  border: 2px solid #222; /* 테두리 */
+  border-radius: 8px; /* 둥근 모서리 */
+  background-color: #f9f9f9; /* 배경색 */
+  color: #333; /* 텍스트 색상 */
+  outline: none; /* 포커스 시 기본 파란 테두리 제거 */
+  transition: border-color 0.3s, background-color 0.3s; /* 애니메이션 */
+}
+
+/* 입력 필드에 포커스 되었을 때 */
+.styled-input:focus {
+  border-color: #ffcc00; /* 테두리 색상 변경 */
+  background-color: #fff; /* 배경색 변경 */
+  box-shadow: 0 0 5px rgba(255, 204, 0, 0.5); /* 강조 효과 */
+}
+
 </style>
