@@ -4,19 +4,19 @@
             <button class="close-button" @click="$emit('close')">
                 &times;
             </button>
-            <h2>회원가입</h2>
+            <h2>로그인</h2>
             <form @submit.prevent="handleSignup">
                 <div class="form-group">
-                    <label for="username">아이디</label><br />
-                    <input
-                        type="text"
-                        v-model="username"
+                    <label for="email">이메일</label><br />
+                        <input
+                            type="email"
+                        v-model="email"
                         class="styled-input"
                         required
                     />
                 </div>
                 <div class="form-group">
-                    <label for="password">비밀번호</label><br />
+                    <label for="password">비밀번호</label>
                     <input
                         type="password"
                         v-model="password"
@@ -46,7 +46,7 @@ export default {
     name: 'SignupModal',
     data() {
         return {
-            username: '',
+            email: '',
             password: '',
             confirmPassword: '',
             errorMessage: '',
@@ -56,10 +56,25 @@ export default {
         handleSignup() {
             if (this.password !== this.confirmPassword) {
                 this.errorMessage = '비밀번호가 일치하지 않습니다.';
-            } else {
-                alert('회원가입 성공');
-                this.$emit('close');
+                return;
             }
+            const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+            // 이메일 중복 확인
+            if (storedUsers.some((u) => u.email === this.email)) {
+                this.errorMessage = '이미 존재하는 이메일입니다.';
+                return;
+            }
+
+            // 새 사용자 추가
+            const newUser = { email: this.email, password: this.password };
+            storedUsers.push(newUser);
+
+            // localStorage에 사용자 저장
+            localStorage.setItem('users', JSON.stringify(storedUsers));
+
+            alert('회원가입 성공!');
+            this.$emit('close'); // 모달 닫기
         },
     },
 };

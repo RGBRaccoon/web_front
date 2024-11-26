@@ -35,13 +35,13 @@ export default {
     },
     mounted() {
         // 컴포넌트 로드시 영화가 찜 목록에 있는지 확인
-        const wishlist = JSON.parse(sessionStorage.getItem('wishlist') || '[]');
+        const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
         this.isWishlisted = wishlist.some((item) => item.id === this.movie.id);
     },
     methods: {
         toggleWishlist() {
             let wishlist = JSON.parse(
-                sessionStorage.getItem('wishlist') || '[]'
+                localStorage.getItem('wishlist') || '[]'
             );
 
             const movieIndex = wishlist.findIndex(
@@ -55,7 +55,7 @@ export default {
                 this.isWishlisted = false;
             }
 
-            sessionStorage.setItem('wishlist', JSON.stringify(wishlist)); // 세션 스토리지에 저장
+            localStorage.setItem('wishlist', JSON.stringify(wishlist)); // 세션 스토리지에 저장
             this.$emit('update-wishlist', wishlist); // 부모 컴포넌트에 업데이트 알림
         },
     },

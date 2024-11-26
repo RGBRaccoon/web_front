@@ -32,13 +32,15 @@ import HeaderComponent from '@/components/HeaderComponent.vue';
 import LoginModal from '@/components/LoginModal.vue';
 import SignupModal from '@/components/SignupModal.vue';
 
-export default {
+export default {    
     name: 'App',
     components: { HeaderComponent, LoginModal, SignupModal },
     data() {
         return {
             showLoginModal: false,
             showSignupModal: false,
+            isLoggedIn: localStorage.getItem("isLoggedIn") === "false", // 초기 로그인 상태 확인
+            users: JSON.parse(localStorage.getItem("users")) || [], // 저장된 사용자 정보
         };
     },
     methods: {

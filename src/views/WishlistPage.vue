@@ -24,7 +24,7 @@ export default {
     },
     created() {
         // 세션 스토리지에서 찜한 영화 목록 가져오기
-        const savedWishlist = sessionStorage.getItem('wishlist');
+        const savedWishlist = localStorage.getItem('wishlist');
         this.wishlist = savedWishlist ? JSON.parse(savedWishlist) : [];
     },
 };
