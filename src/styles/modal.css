@@ -1,0 +1,78 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #333;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+    text-align: center;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.styled-input {
+    width: 80%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 2px solid #222;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    outline: none;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.styled-input:focus {
+    border-color: #ffcc00;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+}
+
+.submit-button {
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.submit-button:hover {
+    background-color: #ffd700;
+}
+
+.error {
+    color: red;
+    margin-top: 1rem;
+}
+
+.toggle-link {
+    color: #ffcc00;
+    cursor: pointer;
+    margin-top: 1rem;
+    text-decoration: underline;
+}
+label {
+    font-weight: bold;
+    margin-bottom: 0.5rem; /* 라벨과 입력칸 사이의 간격 */
+}
