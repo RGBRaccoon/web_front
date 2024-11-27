@@ -54,7 +54,7 @@ export default {
             if (user) {
                 // 로그인 성공
                 alert('로그인 성공');
-                console.log("로그인 성공")
+                console.log('로그인 성공');
                 localStorage.setItem('isLoggedIn', true); // 로그인 상태 저장
                 localStorage.setItem('currentUser', JSON.stringify(user)); // 현재 사용자 저장
                 this.$emit('close'); // 모달 닫기

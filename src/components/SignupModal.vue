@@ -8,8 +8,8 @@
             <form @submit.prevent="handleSignup">
                 <div class="form-group">
                     <label for="email">이메일</label><br />
-                        <input
-                            type="email"
+                    <input
+                        type="email"
                         v-model="email"
                         class="styled-input"
                         required

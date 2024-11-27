@@ -40,9 +40,7 @@ export default {
     },
     methods: {
         toggleWishlist() {
-            let wishlist = JSON.parse(
-                localStorage.getItem('wishlist') || '[]'
-            );
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
 
             const movieIndex = wishlist.findIndex(
                 (item) => item.id === this.movie.id

@@ -31,19 +31,43 @@
 import HeaderComponent from '@/components/HeaderComponent.vue';
 import LoginModal from '@/components/LoginModal.vue';
 import SignupModal from '@/components/SignupModal.vue';
-
-export default {    
+export default {
     name: 'App',
     components: { HeaderComponent, LoginModal, SignupModal },
     data() {
         return {
             showLoginModal: false,
             showSignupModal: false,
-            isLoggedIn: localStorage.getItem("isLoggedIn") === "false", // 초기 로그인 상태 확인
-            users: JSON.parse(localStorage.getItem("users")) || [], // 저장된 사용자 정보
+            isLoggedIn: localStorage.getItem('isLoggedIn') === 'false', // 초기 로그인 상태 확인
+            users: JSON.parse(localStorage.getItem('users')) || [], // 저장된 사용자 정보
+        };
+    },
+    watch: {
+        $route: 'checkAuth', // 라우터가 변경될 때마다 로그인 상태 확인
+    },
+    mounted() {
+        this.checkAuth(); // 페이지 로드 시 로그인 상태 확인
+    },
+    provide() {
+        return {
+            toggleLoginModal: this.toggleLoginModal,
         };
     },
     methods: {
+        checkAuth() {
+            
+            console.log("check show")
+            console.log(this.isLoggedIn)
+            console.log(this.$route.meta.requiresAuth )
+
+            if (this.$route.meta.requiresAuth && !this.isLoggedIn) {
+                console.log("show login")
+                // 로그인 필요하지만 로그인 안 된 경우
+                this.showLoginModal = true; // 모달 표시
+            } else {
+                this.showLoginModal = false; // 모달 숨김
+            }
+        },
         toggleLoginModal() {
             this.showLoginModal = !this.showLoginModal;
         },
