@@ -8,7 +8,7 @@ const routes = [
         path: '/',
         name: 'MainPage',
         component: Home,
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: true },
     },
     {
         path: '/search',

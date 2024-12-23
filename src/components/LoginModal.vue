@@ -31,6 +31,10 @@
             <p @click="$emit('switch-to-signup')" class="toggle-link">
                 회원가입
             </p>
+            <!-- 카카오 로그인 버튼 추가 -->
+            <button @click="loginWithKakao" class="kakao-button">
+                카카오 로그인
+            </button>
         </div>
     </div>
 </template>
@@ -62,10 +66,55 @@ export default {
                 this.errorMessage = '아이디 또는 비밀번호가 잘못되었습니다.';
             }
         },
+        loginWithKakao() {
+            window.Kakao.Auth.login({
+                success: (authObj) => {
+                    console.log('로그인 성공:', authObj);
+                    window.Kakao.API.request({
+                        url: '/v2/user/me',
+                        success: (res) => {
+                            console.log('사용자 정보:', res);
+                            const nickname = res.kakao_account.profile.nickname;
+                            const profile_image_url =
+                                res.kakao_account.profile.profile_image_url;
+                            localStorage.setItem('nickname', nickname);
+                            localStorage.setItem(
+                                'profile_image_url',
+                                profile_image_url
+                            );
+                            localStorage.setItem('isLoggedIn', true);
+                            alert(`${nickname}님 환영합니다!`);
+                            this.$emit('close'); // 모달 닫기
+                        },
+                        fail: (error) => {
+                            console.error('사용자 정보 요청 실패:', error);
+                        },
+                    });
+                },
+                fail: (err) => {
+                    console.error('카카오 로그인 실패:', err);
+                },
+            });
+        },
     },
 };
 </script>
 
 <style scoped>
 @import '@/styles/modal.css'; /* 공통 스타일 임포트 */
+
+.kakao-button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #fee500;
+    border: none;
+    border-radius: 5px;
+    color: #3c1e1e;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.kakao-button:hover {
+    background-color: #ffd900;
+}
 </style>

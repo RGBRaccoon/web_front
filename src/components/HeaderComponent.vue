@@ -14,25 +14,51 @@
                 >내가 찜한 리스트</router-link
             >
         </nav>
-        <button
-            @click="
-                $emit('show-login');
-                console.log('Login button clicked!');
-            "
-            class="login-button"
-        >
-            <img
-                src="@/assets/login.png"
-                alt="로그인 아이콘"
-                class="login_icon"
-            />
-        </button>
+
+        <div class="login-container">
+            <span v-if="nickname" class="nickname">{{ nickname }}님</span>
+
+            <button
+                @click="
+                    $emit('show-login');
+                    
+                    console.log('Login button clicked!');
+                "
+                class="login-button"
+            >
+                <img
+                    :src="profile_image_url || require('@/assets/login.png')"
+                    alt="프로필 이미지"
+                    class="profile_image"
+                />
+            </button>
+        </div>
     </header>
 </template>
 
 <script>
 export default {
     name: 'HeaderComponent',
+    data() {
+        return {
+            nickname: localStorage.getItem('nickname') || '', // 닉네임 가져오기
+            profile_image_url: localStorage.getItem('profile_image_url') || '',
+        };
+    },
+    methods: {
+        updateNickname() {
+            this.nickname = localStorage.getItem('nickname') || '';
+            this.profile_image_url =
+                localStorage.getItem('profile_image_url') || '';
+        },
+    },
+    mounted() {
+        // 로그인 상태 감시 및 업데이트
+        window.addEventListener('storage', this.updateNickname);
+    },
+    beforeUnmount() {
+        window.removeEventListener('storage', this.updateNickname);
+    },
 };
 </script>
 
@@ -93,5 +119,12 @@ export default {
 .login_icon {
     width: 60px;
     height: 60px;
+}
+.profile_image {
+    margin-top: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 </style>

@@ -38,7 +38,7 @@ export default {
         return {
             showLoginModal: false,
             showSignupModal: false,
-            isLoggedIn: localStorage.getItem('isLoggedIn') === 'false', // 초기 로그인 상태 확인
+            isLoggedIn: localStorage.getItem('isLoggedIn') , // 초기 로그인 상태 확인
             users: JSON.parse(localStorage.getItem('users')) || [], // 저장된 사용자 정보
         };
     },
@@ -55,13 +55,12 @@ export default {
     },
     methods: {
         checkAuth() {
-            
-            console.log("check show")
-            console.log(this.isLoggedIn)
-            console.log(this.$route.meta.requiresAuth )
+            console.log('check show');
+            console.log(this.isLoggedIn);
+            console.log(this.$route.meta.requiresAuth);
 
             if (this.$route.meta.requiresAuth && !this.isLoggedIn) {
-                console.log("show login")
+                console.log('show login');
                 // 로그인 필요하지만 로그인 안 된 경우
                 this.showLoginModal = true; // 모달 표시
             } else {
